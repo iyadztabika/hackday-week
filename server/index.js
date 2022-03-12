@@ -1,10 +1,11 @@
-// import express
 const express = require('express')
-// init express
 const app = express()
+const cors = require('cors')
 
 // parses incoming requests with JSON payloads
 app.use(express.json())
+// enable all cors requests
+app.use(cors())
 
 // variable db will automatically go over every single table/model that we created
 const db = require('./models')
