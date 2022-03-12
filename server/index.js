@@ -1,11 +1,17 @@
 // import express
 const express = require('express')
-
 // init express
 const app = express()
 
+// parses incoming requests with JSON payloads
+app.use(express.json())
+
 // variable db will automatically go over every single table/model that we created
 const db = require('./models')
+
+// routers
+const postRouter = require('./routes/Posts')
+app.use('/posts', postRouter)
 
 db.sequelize
     // sync the model to the db, that is create the table
