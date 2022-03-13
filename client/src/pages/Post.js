@@ -5,6 +5,7 @@ import axios from 'axios'
 const Post = () => {
     const [postData, setPostData] = useState({})
     const [commentData, setCommentData] = useState([])
+    const [newComment, setNewComment] = useState("")
     const { id } = useParams()
 
     useEffect(() => {
@@ -14,7 +15,7 @@ const Post = () => {
                 setPostData(res.data)
             })
             .catch(err => {
-                console.log(err.response.status)
+                console.log(err)
             })
 
         axios
@@ -26,6 +27,19 @@ const Post = () => {
                 console.log(err.response.status)
             })
     }, [id])
+
+    const addComment = () => {
+        axios
+            .post(`http://localhost:5000/comments`, {
+                commentBody: newComment, 
+                PostId: id
+            })
+            .then((res) => {
+                const commentToAdd = { commentBody: newComment }
+                setCommentData([...commentData, commentToAdd])
+                setNewComment("")
+            })
+    }
 
     return (
         <div className='postPage'>
@@ -42,11 +56,11 @@ const Post = () => {
             </div>
             <div className="postPageRight">
                 <div className='addCommentContainer'>
-                    <input type="text" placeholder='Add Comment' />
-                    <button>Add Comment</button>
+                    <input type="text" placeholder='Add Comment' value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                    <button onClick={addComment}>Add Comment</button>
                 </div>
                 <div className='commentsList'>
-                    {commentData.map((comment, index) => (
+                    {commentData?.map((comment, index) => (
                         <div className='comment' key={index}>
                             {comment.commentBody}
                         </div>
