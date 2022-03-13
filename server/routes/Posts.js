@@ -18,6 +18,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+// GET Single Post method
+router.get('/single/:id', async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const post = await Posts.findByPk(id)
+        res.status(200).json(post)
+    } catch (err) {
+        res.status(500)
+    }
+})
+
 // POST method
 router.post('/', async (req, res) => {
     const post = req.body
