@@ -5,13 +5,13 @@ const CreatePost = () => {
     return (
         <div className='createPostPage'>
             <Formik >
-                <Form>
+                <Form className='formContainer'>
                     <label>Title:</label>
-                    <Field id="inputCreatePost" name="title" placeholder="Add Title" />
+                    <Field autocomplet="off" id="inputCreatePost" name="title" placeholder="Add Title" />
                     <label>Post:</label>
-                    <Field id="inputCreatePost" name="post" placeholder="Add Post" />
+                    <Field autocomplet="off" id="inputCreatePost" name="post" placeholder="Add Post" />
                     <label>Username:</label>
-                    <Field id="inputCreatePost" name="username" placeholder="Add Username" />
+                    <Field autocomplet="off" id="inputCreatePost" name="username" placeholder="Add Username" />
 
                     <button type='submit'>Create Post</button>
                 </Form>
