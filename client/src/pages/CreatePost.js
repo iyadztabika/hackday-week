@@ -2,9 +2,23 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const CreatePost = () => {
+
+    const initialValues = {
+        title: "",
+        postText: "",
+        username: ""
+    }
+
+    const onSubmit = (data) => {
+        console.log(data)
+    }
+
     return (
         <div className='createPostPage'>
-            <Formik >
+            <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+            >
                 <Form className='formContainer'>
                     <label>Title:</label>
                     <Field autocomplet="off" id="inputCreatePost" name="title" placeholder="Add Title" />
