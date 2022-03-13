@@ -1,8 +1,22 @@
 import React from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const CreatePost = () => {
     return (
-        <div>CreatePost</div>
+        <div className='createPostPage'>
+            <Formik >
+                <Form>
+                    <label>Title:</label>
+                    <Field id="inputCreatePost" name="title" placeholder="Add Title" />
+                    <label>Post:</label>
+                    <Field id="inputCreatePost" name="post" placeholder="Add Post" />
+                    <label>Username:</label>
+                    <Field id="inputCreatePost" name="username" placeholder="Add Username" />
+
+                    <button type='submit'>Create Post</button>
+                </Form>
+            </Formik>
+        </div>
     )
 }
 
