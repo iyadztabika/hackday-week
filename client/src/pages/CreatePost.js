@@ -29,10 +29,13 @@ const CreatePost = () => {
             >
                 <Form className='formContainer'>
                     <label>Title:</label>
+                    <ErrorMessage name="title" component="span" />
                     <Field autocomplet="off" id="inputCreatePost" name="title" placeholder="Add Title" />
                     <label>Post:</label>
-                    <Field autocomplet="off" id="inputCreatePost" name="post" placeholder="Add Post" />
+                    <ErrorMessage name="postText" component="span" />
+                    <Field autocomplet="off" id="inputCreatePost" name="postText" placeholder="Add Post" />
                     <label>Username:</label>
+                    <ErrorMessage name="username" component="span" />
                     <Field autocomplet="off" id="inputCreatePost" name="username" placeholder="Add Username" />
 
                     <button type='submit'>Create Post</button>
