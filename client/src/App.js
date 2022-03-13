@@ -20,7 +20,7 @@ function App() {
       {listOfPosts.map((post, index) => (
         <div className='post' key={index}>
           <div className="title">{post.title}</div>
-          <div className="body">{post.postText}</div>
+          <div className="content">{post.postText}</div>
           <div className="footer">{post.username}</div>
         </div>
       ))}
