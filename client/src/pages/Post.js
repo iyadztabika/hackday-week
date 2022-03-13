@@ -18,8 +18,21 @@ const Post = () => {
     }, [id])
 
     return (
-        <div>
-            {postData.username}
+        <div className='postPage'>
+            <div className="postPageLeft">
+                <div className="postPageTitle">
+                    {postData.title}
+                </div>
+                <div className="postPageText">
+                    {postData.postText}
+                </div>
+                <div className="postPageFooter">
+                    {postData.username}
+                </div>
+            </div>
+            <div className="postPageRight">
+                Comment Section
+            </div>
         </div>
     )
 }
