@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const Post = () => {
     const [postData, setPostData] = useState({})
+    const [commentData, setCommentData] = useState([])
     const { id } = useParams()
 
     useEffect(() => {
@@ -11,6 +12,15 @@ const Post = () => {
             .get(`http://localhost:5000/posts/single/${id}`)
             .then(res => {
                 setPostData(res.data)
+            })
+            .catch(err => {
+                console.log(err.response.status)
+            })
+
+        axios
+            .get(`http://localhost:5000/comments/${id}`)
+            .then(res => {
+                setCommentData(res.data)
             })
             .catch(err => {
                 console.log(err.response.status)
@@ -31,7 +41,17 @@ const Post = () => {
                 </div>
             </div>
             <div className="postPageRight">
-                Comment Section
+                <div className='addCommentContainer'>
+                    <input type="text" placeholder='Add Comment' />
+                    <button>Add Comment</button>
+                </div>
+                <div className='commentsList'>
+                    {commentData.map((comment, index) => (
+                        <div className='comment' key={index}>
+                            {comment.commentBody}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
