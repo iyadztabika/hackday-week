@@ -11,6 +11,9 @@ const Home = () => {
         .then((res) => {
             setListOfPosts(res.data)
         })
+        .catch(err => {
+            console.log(err.response.status)
+        })
     }, [])
 
     return (
