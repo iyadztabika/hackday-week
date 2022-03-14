@@ -26,8 +26,8 @@ function App() {
           <Route path='/' component={Home} exact />
           <Route path='/createpost' component={CreatePost} />
           <Route path='/post/:id' component={Post} />
-          <Route path='register' component={Register} />
-          <Route path='login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/login' component={Login} />
         </Switch>
       </Router>
     </div>
