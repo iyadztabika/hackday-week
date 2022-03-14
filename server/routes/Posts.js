@@ -2,12 +2,12 @@ const express = require('express')
 // Router() method creates a new router object
 const router = express.Router()
 // import Posts model from models
-const { Posts } = require('../models')
+const { Posts, Likes } = require('../models')
 
 // GET method
 router.get('/', async (req, res) => {
     try {
-        const listOfPosts = await Posts.findAll()
+        const listOfPosts = await Posts.findAll({include: [Likes]})
         if (listOfPosts.length > 0) {
             res.status(200).json(listOfPosts)
         } else {
