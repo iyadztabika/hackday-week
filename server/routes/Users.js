@@ -5,6 +5,8 @@ const router = express.Router()
 const { Users } = require('../models')
 const bycrpt = require('bcrypt')
 
+const { validateToken } = require('../middleware/AuthMiddleware')
+
 const { sign } = require('jsonwebtoken')
 
 
@@ -45,6 +47,11 @@ router.post('/login', async (req, res) => {
             res.status(200).json(accessToken)
         })
 
+})
+
+// check if the token is valid or not
+router.get('/token', validateToken, (req, res) => {
+    res.json(req.user)
 })
 
 module.exports = router

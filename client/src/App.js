@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import axios from 'axios';
 
 // context
 import { AuthContext } from './helpers/AuthContext';
@@ -18,9 +19,18 @@ function App() {
   const [authState, setAuthState] = useState(false)
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setAuthState(true)
-    }
+    axios
+      .get("http://localhost:5000/auth/token", { headers: {accessToken: localStorage.getItem("accessToken")} })
+      .then(res => {
+        if (res.data.error) {
+          setAuthState(false)
+        } else {
+          setAuthState(true)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
   return (
