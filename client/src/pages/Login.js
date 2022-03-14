@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
-const Login = () => {
+import { AuthContext } from '../helpers/AuthContext'
 
+const Login = () => {
     let history = useHistory()
+
+    const { setAuthState } = useContext(AuthContext)
 
     const initialValues = {
         username: "",
@@ -26,6 +29,7 @@ const Login = () => {
                     alert(res.data.error)
                 } else {
                     localStorage.setItem('accessToken', res.data)
+                    setAuthState(true)
                     history.push('/')
                 }
             })
