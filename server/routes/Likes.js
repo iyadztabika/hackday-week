@@ -14,14 +14,14 @@ router.post('/', validateToken, async (req, res) => {
     if (!found) {
         try {
             await Likes.create({ PostId: PostId, UserId: userId })
-            res.status(201).json('Likes added.')
+            res.status(201).json({liked: true})
         } catch (err) {
             res.status(500)
         }
     } else {
         try {
             await Likes.destroy({ where: { PostId: PostId, UserId: userId } })
-            res.status(200).json('Likes deleted.')
+            res.status(200).json({liked: false})
         } catch (err) {
             res.status(500)
         }

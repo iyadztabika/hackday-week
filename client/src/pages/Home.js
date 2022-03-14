@@ -26,11 +26,21 @@ const Home = () => {
                 { headers: { accessToken: localStorage.getItem('accessToken') } }
             )
             .then((res) => {
-                alert(res.data)
+                setListOfPosts(listOfPosts.map(post => {
+                    if (post.id === postId) {
+                        if (res.data.liked) {
+                            return {...post, Likes: [...post.Likes, 0] }
+                        } else {
+                            const likeArray = post.Likes
+                            likeArray.pop()
+                            return {...post, Likes: likeArray }
+                        }
+                    } else {
+                        return post
+                    }
+                }))
             })
     }
-
-    console.log(listOfPosts)
 
     return (
         <div>
