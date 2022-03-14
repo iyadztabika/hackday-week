@@ -30,6 +30,8 @@ const Home = () => {
             })
     }
 
+    console.log(listOfPosts)
+
     return (
         <div>
             {listOfPosts.map((post, index) => (
@@ -39,6 +41,7 @@ const Home = () => {
                 <div className="footer">
                     {post.username}
                     <button onClick={() => likePost(post.id)}>Like</button>
+                    <label>{post?.Likes?.length}</label>
                 </div>
                 </div>
             ))}
