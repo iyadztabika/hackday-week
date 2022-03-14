@@ -19,7 +19,11 @@ const Login = () => {
         axios
             .post("http://localhost:5000/auth/login", data)
             .then((res) => {
-                console.log(res.data)
+                if (res.data.error) {
+                    alert(res.data.error)
+                } else {
+                    sessionStorage.setItem('accessToken', res.data)
+                }
             })
     }
 

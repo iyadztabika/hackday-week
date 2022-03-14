@@ -5,6 +5,8 @@ const router = express.Router()
 const { Users } = require('../models')
 const bycrpt = require('bcrypt')
 
+const { sign } = require('jsonwebtoken')
+
 
 // POST registration method
 router.post('/', async (req, res) => {
@@ -37,7 +39,10 @@ router.post('/login', async (req, res) => {
             if (!match) {
                 res.status(403).json({ error: "Wrong username and password combination!" })
             }
-            res.status(200).json("Login Success")
+
+            const accessToken = sign({ username: user.username, id: user.id }, "importantsecret")
+
+            res.status(200).json(accessToken)
         })
 
 })
