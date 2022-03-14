@@ -18,7 +18,7 @@ const Register = () => {
     const onSubmit = (data) => {
         axios
             .post("http://localhost:5000/auth", data)
-            .then(() => {
+            .then((res) => {
                 console.log(data)
             })
     }
