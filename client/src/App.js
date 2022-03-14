@@ -16,16 +16,20 @@ import Register from './pages/Register';
 import './App.css';
 
 function App() {
-  const [authState, setAuthState] = useState(false)
+  const [authState, setAuthState] = useState({username: "", id: 0, status: false})
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/auth/token", { headers: {accessToken: localStorage.getItem("accessToken")} })
       .then(res => {
         if (res.data.error) {
-          setAuthState(false)
+          setAuthState({...authState, status: false})
         } else {
-          setAuthState(true)
+          setAuthState({
+            username: res.data.username,
+            id: res.data.id,
+            status: true
+          })
         }
       })
       .catch(err => {
@@ -35,7 +39,7 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("accessToken")
-    setAuthState(false)
+    setAuthState({username: "", id: 0, status: false})
   }
 
   return (
@@ -45,7 +49,7 @@ function App() {
           <div className="navbar">
             <Link to='/'>Home Page</Link>
             <Link to='/createpost'>Create a Post</Link>
-            {!authState ? (
+            {!authState.status ? (
               <>
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>
@@ -53,6 +57,7 @@ function App() {
             ) : (
               <button onClick={logout}>Logout</button>
             )}
+            {authState.username && <h1>{authState.username}</h1> }
           </div>
           <Switch>
             <Route path='/' component={Home} exact />
