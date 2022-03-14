@@ -32,6 +32,17 @@ router.get('/single/:id', async (req, res) => {
     }
 })
 
+// router.get('/singleUser/:id', async (req, res) => {
+//     const id = req.params.id
+
+//     try {
+//         const listPosts = await Posts.findAll({ where: {  } })
+//         res.status(200).json(post)
+//     } catch (err) {
+//         res.status(500)
+//     }
+// })
+
 // POST method
 router.post('/', validateToken, async (req, res) => {
     const post = req.body

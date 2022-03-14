@@ -58,7 +58,7 @@ function App() {
               <>
                 <Link to='/'>Home Page</Link>
                 <Link to='/createpost'>Create a Post</Link>
-                <button onClick={logout}>Logout</button>
+                <button id='logout' onClick={logout}>Logout</button>
               </>
             )}
             {authState.username && <h1>{authState.username}</h1> }

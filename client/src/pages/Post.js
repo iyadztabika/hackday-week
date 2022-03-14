@@ -90,7 +90,7 @@ const Post = () => {
                     {commentData?.map((comment, index) => (
                         <div className='comment' key={index}>
                             {comment.commentBody}
-                            <label>Username: {comment.username}</label>
+                            <label className='usernameLabel'>Username: {comment.username}</label>
                             {authState.username === comment.username && (
                                 <button onClick={() => deleteComment(comment.id)}>x</button>
                             )}

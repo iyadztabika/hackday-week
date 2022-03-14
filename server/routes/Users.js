@@ -23,6 +23,9 @@ router.post('/', async (req, res) => {
             })
             res.status(201).json("User Created.")
         })
+        .catch(err => {
+            console.log(err)
+        })
 })
 
 // POST login method
@@ -45,6 +48,9 @@ router.post('/login', async (req, res) => {
             const accessToken = sign({ username: user.username, id: user.id }, "importantsecret")
 
             res.status(200).json({token: accessToken, username, id: user.id})
+        })
+        .catch(err => {
+            console.log(err)
         })
 
 })
