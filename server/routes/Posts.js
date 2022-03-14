@@ -4,6 +4,8 @@ const router = express.Router()
 // import Posts model from models
 const { Posts, Likes } = require('../models')
 
+const { validateToken } = require('../middleware/AuthMiddleware')
+
 // GET method
 router.get('/', async (req, res) => {
     try {
@@ -31,8 +33,9 @@ router.get('/single/:id', async (req, res) => {
 })
 
 // POST method
-router.post('/', async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
     const post = req.body
+    post.username = req.user.username
 
     try {
         // create() method builds a new model instance and calls save on it
