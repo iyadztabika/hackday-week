@@ -54,4 +54,18 @@ router.get('/token', validateToken, (req, res) => {
     res.json(req.user)
 })
 
+router.get('/profileInfo/:id', async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const profileInfo = await Users.findByPk(id, {
+            attributes: { exclude: ["password"] }
+        })
+        res.status(200).json(profileInfo)
+    } catch (err) {
+        res.status(404).json("Profile not found.")
+    }
+
+})
+
 module.exports = router
