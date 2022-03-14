@@ -11,6 +11,7 @@ import CreatePost from './pages/CreatePost';
 import Post from './pages/Post';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PageNotFound from './pages/PageNotFound';
 
 // styles
 import './App.css';
@@ -65,6 +66,7 @@ function App() {
             <Route path='/post/:id' component={Post} />
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
+            <Route path='*' exact component={PageNotFound} />
           </Switch>
         </Router>
       </AuthContext.Provider>
