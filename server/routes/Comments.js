@@ -1,8 +1,9 @@
 const express = require('express')
 // Router() method creates a new router object
 const router = express.Router()
-// import Posts model from models
+// import comments model from models
 const { Comments } = require('../models')
+const { validateToken } = require('../middleware/AuthMiddleware')
 
 // GET comments method
 router.get('/:postId', async (req, res) => {
@@ -17,7 +18,7 @@ router.get('/:postId', async (req, res) => {
 })
 
 // POST comments method
-router.post('/', async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
     const comment = req.body
 
     try {

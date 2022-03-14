@@ -1,9 +1,12 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
 const Login = () => {
+
+    let history = useHistory()
 
     const initialValues = {
         username: "",
@@ -23,6 +26,7 @@ const Login = () => {
                     alert(res.data.error)
                 } else {
                     sessionStorage.setItem('accessToken', res.data)
+                    history.push('/')
                 }
             })
     }

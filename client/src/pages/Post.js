@@ -33,11 +33,15 @@ const Post = () => {
             .post(`http://localhost:5000/comments`, {
                 commentBody: newComment, 
                 PostId: id
-            })
+            },{ headers: {accessToken:sessionStorage.getItem("accessToken")}})
             .then((res) => {
-                const commentToAdd = { commentBody: newComment }
-                setCommentData([...commentData, commentToAdd])
-                setNewComment("")
+                if (res.data.error) {
+                    alert(res.data.error)
+                } else {
+                    const commentToAdd = { commentBody: newComment }
+                    setCommentData([...commentData, commentToAdd])
+                    setNewComment("")
+                }
             })
     }
 
