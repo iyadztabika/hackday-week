@@ -1,21 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+import {AuthContext} from '../helpers/AuthContext'
+
 const Home = () => {
     const [listOfPosts, setListOfPosts] = useState([])
-
     const history = useHistory()
+    const { authState } = useContext(AuthContext)
 
     useEffect(() => {
-        axios
-        .get('http://localhost:5000/posts')
-        .then((res) => {
-            setListOfPosts(res.data)
-        })
-        .catch(err => {
-            console.log(err.response.status)
-        })
+
+        if (!authState.status) {
+            history.push('/login')
+        } else {
+            axios
+            .get('http://localhost:5000/posts')
+            .then((res) => {
+                setListOfPosts(res.data)
+            })
+            .catch(err => {
+                console.log(err.response.status)
+            })
+        }
+
     }, [])
 
     const likePost = (postId) => {

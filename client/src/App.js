@@ -48,15 +48,17 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <div className="navbar">
-            <Link to='/'>Home Page</Link>
-            <Link to='/createpost'>Create a Post</Link>
             {!authState.status ? (
               <>
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>
               </>
             ) : (
-              <button onClick={logout}>Logout</button>
+              <>
+                <Link to='/'>Home Page</Link>
+                <Link to='/createpost'>Create a Post</Link>
+                <button onClick={logout}>Logout</button>
+              </>
             )}
             {authState.username && <h1>{authState.username}</h1> }
           </div>

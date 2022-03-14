@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
+import { AuthContext } from '../helpers/AuthContext'
+
 const CreatePost = () => {
     const history = useHistory()
+    const { authState } = useContext(AuthContext)
+
+    useEffect(() => {
+        if (!authState.status) {
+            history.push('/login')
+        }
+    }, [])
 
     const initialValues = {
         title: "",
