@@ -25,7 +25,7 @@ const Login = () => {
                 if (res.data.error) {
                     alert(res.data.error)
                 } else {
-                    sessionStorage.setItem('accessToken', res.data)
+                    localStorage.setItem('accessToken', res.data)
                     history.push('/')
                 }
             })

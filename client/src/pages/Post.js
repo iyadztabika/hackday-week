@@ -33,7 +33,7 @@ const Post = () => {
             .post(`http://localhost:5000/comments`, {
                 commentBody: newComment, 
                 PostId: id
-            },{ headers: {accessToken:sessionStorage.getItem("accessToken")}})
+            },{ headers: {accessToken:localStorage.getItem("accessToken")}})
             .then((res) => {
                 if (res.data.error) {
                     alert(res.data.error)
