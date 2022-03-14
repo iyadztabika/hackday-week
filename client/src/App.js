@@ -69,7 +69,7 @@ function App() {
             <Route path='/post/:id' component={Post} />
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile/:id' component={Profile} />
             <Route path='*' exact component={PageNotFound} />
           </Switch>
         </Router>
