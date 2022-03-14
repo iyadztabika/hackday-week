@@ -38,7 +38,7 @@ const Post = () => {
                 if (res.data.error) {
                     alert(res.data.error)
                 } else {
-                    const commentToAdd = { commentBody: newComment }
+                    const commentToAdd = { commentBody: newComment, username: res.data.username }
                     setCommentData([...commentData, commentToAdd])
                     setNewComment("")
                 }
@@ -67,6 +67,7 @@ const Post = () => {
                     {commentData?.map((comment, index) => (
                         <div className='comment' key={index}>
                             {comment.commentBody}
+                            <label>Username: {comment.username}</label>
                         </div>
                     ))}
                 </div>
