@@ -25,13 +25,12 @@ const Login = () => {
         axios
             .post("http://localhost:5000/auth/login", data)
             .then((res) => {
-                if (res.data.error) {
-                    alert(res.data.error)
-                } else {
-                    localStorage.setItem('accessToken', res.data.token)
-                    setAuthState({ username: res.data.username, id: res.data.id, status: true })
-                    history.push('/')
-                }
+                localStorage.setItem('accessToken', res.data.token)
+                setAuthState({ username: res.data.username, id: res.data.id, status: true })
+                history.push('/')
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 
@@ -45,11 +44,11 @@ const Login = () => {
                 <Form className='formContainer'>
                     <label>Username:</label>
                     <ErrorMessage name="username" component="span" />
-                    <Field autoComplete="off" id="inputCreatePost" name="username" placeholder="Your username" />
+                    <Field autoComplete="off" className="input" name="username" placeholder="Your username" />
 
                     <label>Password:</label>
                     <ErrorMessage name="password" component="span" />
-                    <Field autoComplete="off" type="password" id="inputCreatePost" name="password" placeholder="Your password" />
+                    <Field autoComplete="off" className="input" type="password" name="password" placeholder="Your password" />
 
                     <button type='submit'>Login</button>
                 </Form>

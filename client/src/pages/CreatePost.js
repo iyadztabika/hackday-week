@@ -50,10 +50,10 @@ const CreatePost = () => {
                 <Form className='formContainer'>
                     <label>Title:</label>
                     <ErrorMessage name="title" component="span" />
-                    <Field id="inputCreatePost" name="title" placeholder="Add Title" />
+                    <Field className="input" name="title" placeholder="Add Title" />
                     <label>Post:</label>
                     <ErrorMessage name="postText" component="span" />
-                    <Field id="inputCreatePost" name="postText" placeholder="Add Post" />
+                    <Field className="input" name="postText" placeholder="Add Post" />
 
                     <button type='submit'>Create Post</button>
                 </Form>

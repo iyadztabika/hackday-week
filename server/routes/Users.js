@@ -16,21 +16,29 @@ router.post('/', async (req, res) => {
     // get username and password from the request body
     const { username, password } = req.body
 
+    // findOne, search for a single instance, returns the first instance found, or null if none can be found
+    const user = await Users.findOne({ where: { username: username }})
 
-    bycrpt
-        // hash password, a scrambled representation of itself
-        .hash(password, 10)
-        .then(hash => {
-            // build a new model instance and calls save on it
-            Users.create({
-                username,
-                password: hash
+    // if user found, send status 409
+    if (user) {
+        res.status(409).json({ error: "User Does Exist" })
+    } else {
+        bycrpt
+            // hash password, a scrambled representation of itself
+            .hash(password, 10)
+            .then(hash => {
+                // build a new model instance and calls save on it
+                Users.create({
+                    username,
+                    password: hash
+                })
+                res.status(201).json("User Created.")
             })
-            res.status(201).json("User Created.")
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
 })
 
 // POST login method
@@ -44,26 +52,27 @@ router.post('/login', async (req, res) => {
     // if user not found, send status 404
     if (!user) {
         res.status(404).json({ error: "User Doesn't Exist" })
+    } else {
+        bycrpt
+            // to check password
+            .compare(password, user.password)
+            .then(match => {
+                // if password not match, return 403 forbidden, we have no permission
+                if (!match) {
+                    res.status(403).json({ error: "Wrong username and password combination!" })
+                }
+    
+                // put the username and id as the access token
+                const accessToken = sign({ username: user.username, id: user.id }, "importantsecret")
+    
+                // send status OK
+                res.status(200).json({token: accessToken, username, id: user.id})
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
-    bycrpt
-        // to check password
-        .compare(password, user.password)
-        .then(match => {
-            // if password not match, return 403 forbidden, we have no permission
-            if (!match) {
-                res.status(403).json({ error: "Wrong username and password combination!" })
-            }
-
-            // put the username and id as the access token
-            const accessToken = sign({ username: user.username, id: user.id }, "importantsecret")
-
-            // send status OK
-            res.status(200).json({token: accessToken, username, id: user.id})
-        })
-        .catch(err => {
-            console.log(err)
-        })
 
 })
 

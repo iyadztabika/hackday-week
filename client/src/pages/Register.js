@@ -2,8 +2,10 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const Register = () => {
+    const history = useHistory()
 
     const initialValues = {
         username: "",
@@ -19,7 +21,7 @@ const Register = () => {
         axios
             .post("http://localhost:5000/auth", data)
             .then((res) => {
-                console.log(data)
+                history.push('/')
             })
             .catch(err => {
                 console.log(err)
@@ -36,11 +38,11 @@ const Register = () => {
                 <Form className='formContainer'>
                     <label>Username:</label>
                     <ErrorMessage name="username" component="span" />
-                    <Field autoComplete="off" id="inputCreatePost" name="username" placeholder="Your username" />
+                    <Field autoComplete="off" className="input" id="inputRegUsername" name="username" placeholder="Your username" />
 
                     <label>Password:</label>
                     <ErrorMessage name="password" component="span" />
-                    <Field autoComplete="off" type="password" id="inputCreatePost" name="password" placeholder="Your password" />
+                    <Field autoComplete="off" className="input" type="password" id="inputRegPassword" name="password" placeholder="Your password" />
 
                     <button type='submit'>Register</button>
                 </Form>

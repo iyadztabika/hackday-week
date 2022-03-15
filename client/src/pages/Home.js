@@ -2,12 +2,9 @@ import { useEffect, useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-import {AuthContext} from '../helpers/AuthContext'
-
 const Home = () => {
     const [listOfPosts, setListOfPosts] = useState([])
     const history = useHistory()
-    const { authState } = useContext(AuthContext)
 
     useEffect(() => {
 
@@ -15,7 +12,9 @@ const Home = () => {
             history.push('/login')
         } else {
             axios
-            .get('http://localhost:5000/posts')
+            .get('http://localhost:5000/posts', {
+                headers: { accessToken: localStorage.getItem("accessToken") }
+            })
             .then((res) => {
                 setListOfPosts(res.data)
             })
@@ -30,7 +29,7 @@ const Home = () => {
         axios
             .post(
                 'http://localhost:5000/likes/', 
-                { PostId: postId }, 
+                { PostId: postId },
                 { headers: { accessToken: localStorage.getItem('accessToken') } }
             )
             .then((res) => {
@@ -60,8 +59,10 @@ const Home = () => {
                     <div className="username">
                         <Link to={`/profile/${post.UserId}`}>{post.username}</Link>
                     </div>
-                    <button onClick={() => likePost(post.id)}>Like</button>
-                    <label>{post?.Likes?.length}</label>
+                    <button className='likeBtn' onClick={() => likePost(post.id)}>
+                        <img src="/like.png" alt="like" />
+                    </button>
+                    <label className='likeLable'>{post?.Likes?.length}</label>
                 </div>
                 </div>
             ))}
