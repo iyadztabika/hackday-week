@@ -18,14 +18,19 @@ import Profile from './pages/Profile';
 import './App.css';
 
 function App() {
+  // authState, with username, id and status
   const [authState, setAuthState] = useState({username: "", id: 0, status: false})
 
   useEffect(() => {
     axios
+      // get method
+      // send access token from headers
       .get("http://localhost:5000/auth/token", { headers: {accessToken: localStorage.getItem("accessToken")} })
       .then(res => {
+        // if access token not match
         if (res.data.error) {
           setAuthState({...authState, status: false})
+        // if access token match
         } else {
           setAuthState({
             username: res.data.username,

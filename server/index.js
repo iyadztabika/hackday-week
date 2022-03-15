@@ -1,6 +1,9 @@
+// import express
 const express = require('express')
-const app = express()
+// import cors
 const cors = require('cors')
+// init express
+const app = express()
 
 // parses incoming requests with JSON payloads
 app.use(express.json())
