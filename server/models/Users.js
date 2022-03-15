@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             // when users deleted, the likes on the users will also get deleted
             onDelete: 'cascade'
         })
-
-        // Users.hasMany(models.Posts, {
-        //     onDelete: 'cascade'
-        // })
     }
 
     return Users
