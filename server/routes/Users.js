@@ -82,13 +82,14 @@ router.get('/token', validateToken, (req, res) => {
 })
 
 // get profile info
-router.get('/profileInfo/:id', async (req, res) => {
+router.get('/profileInfo/:name', async (req, res) => {
     // get id from the params
-    const id = req.params.id
+    const name = req.params.name
+    console.log(name)
 
     try {
         // find by primary key from Users table, exculde password
-        const profileInfo = await Users.findByPk(id, {
+        const profileInfo = await Users.findOne({ where: { username: name }}, {
             attributes: { exclude: ["password"] }
         })
         // send status OK and the profile info data

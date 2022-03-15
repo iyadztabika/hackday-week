@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
@@ -57,7 +57,7 @@ const Home = () => {
                 <div className="body" onClick={() => history.push(`/post/${post.id}`)}>{post.postText}</div>
                 <div className="footer">
                     <div className="username">
-                        <Link to={`/profile/${post.UserId}`}>{post.username}</Link>
+                        <Link to={`/profile/${post.username}`}>{post.username}</Link>
                     </div>
                     <button className='likeBtn' onClick={() => likePost(post.id)}>
                         <img src="/like.png" alt="like" />

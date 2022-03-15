@@ -4,11 +4,11 @@ import axios from 'axios'
 
 const Profile = () => {
     const [username, setUsername] = useState('')
-    const { id } = useParams()
+    const { name } = useParams()
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/auth/profileInfo/${id}`)
+            .get(`http://localhost:5000/auth/profileInfo/${name}`)
             .then(res => {
                 setUsername(res.data.username)
             })

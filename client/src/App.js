@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import axios from 'axios';
 
 // context
@@ -20,8 +20,6 @@ import './App.css';
 function App() {
   // authState, with username, id and status
   const [authState, setAuthState] = useState({username: "", id: 0, status: false})
-
-  const history = useHistory()
 
   useEffect(() => {
     axios
@@ -49,7 +47,6 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken")
     setAuthState({username: "", id: 0, status: false})
-    history.push('/login')
   }
 
   return (
