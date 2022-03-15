@@ -67,4 +67,32 @@ router.post('/', validateToken, async (req, res) => {
     }
 })
 
+// UPDATE title method
+router.put('/title', validateToken, async (req, res) => {
+    // get title and post id from request body
+    const { newTitle, id } = req.body
+
+    try {
+        await Posts.update({title: newTitle}, {where: {id: id}})
+        // send status ok
+        res.status(200).json("Title updated.")
+    } catch (err) {
+        res.status(500)
+    }
+})
+
+// UPDATE body method
+router.put('/postText', validateToken, async (req, res) => {
+    // get post text and post id from request body
+    const { newPostText, id } = req.body
+
+    try {
+        await Posts.update({postText: newPostText}, {where: {id: id}})
+        // send status ok
+        res.status(200).json("Post text updated.")
+    } catch (err) {
+        res.status(500)
+    }
+})
+
 module.exports = router

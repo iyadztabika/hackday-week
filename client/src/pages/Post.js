@@ -68,14 +68,48 @@ const Post = () => {
             })
     }
 
+    const editPost = (option) => {
+        if (option === 'title') {
+            let newTitle = prompt('Enter new title: ')
+            axios
+                .put('http://localhost:5000/posts/title', {
+                    newTitle, id
+                }, {
+                    headers: {accessToken:localStorage.getItem("accessToken")}
+                })
+            
+            // for ui
+            setPostData({...postData, title: newTitle})
+        } else {
+            let newPostText = prompt('Enter new text: ')
+            axios
+                .put('http://localhost:5000/posts/postText', {
+                    newPostText, id
+                }, {
+                    headers: {accessToken:localStorage.getItem("accessToken")}
+                })
+            
+            // for ui
+            setPostData({...postData, postText: newPostText})
+        }
+    }
+
     return (
         <div className='postPage'>
             <div className="leftSide">
                 <div className="post" id='individual'>
-                    <div className="title">
+                    <div className="title" onClick={() => {
+                        if (authState.username === postData.username) {
+                            editPost('title')
+                        }
+                    }}>
                         {postData.title}
                     </div>
-                    <div className="body">
+                    <div className="body" onClick={() => {
+                        if (authState.username === postData.username) {
+                            editPost('body')
+                        }
+                    }}>
                         {postData.postText}
                     </div>
                     <div className="footer">
