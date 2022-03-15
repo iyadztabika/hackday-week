@@ -21,6 +21,9 @@ const Register = () => {
             .then((res) => {
                 console.log(data)
             })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (

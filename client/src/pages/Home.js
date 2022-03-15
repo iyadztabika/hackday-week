@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import {AuthContext} from '../helpers/AuthContext'
@@ -55,9 +55,11 @@ const Home = () => {
             {listOfPosts.map((post, index) => (
                 <div className='post' key={index}>
                 <div className="title">{post.title}</div>
-                <div className="content" onClick={() => history.push(`/post/${post.id}`)}>{post.postText}</div>
+                <div className="body" onClick={() => history.push(`/post/${post.id}`)}>{post.postText}</div>
                 <div className="footer">
-                    {post.username}
+                    <div className="username">
+                        <Link to={`/profile/${post.UserId}`}>{post.username}</Link>
+                    </div>
                     <button onClick={() => likePost(post.id)}>Like</button>
                     <label>{post?.Likes?.length}</label>
                 </div>

@@ -12,6 +12,9 @@ const Profile = () => {
             .then(res => {
                 setUsername(res.data.username)
             })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     return (
@@ -19,7 +22,6 @@ const Profile = () => {
             <div className="basicInfo">
                 <h1>Username: {username}</h1>
             </div>
-            <div className="listOfPosts"></div>
         </div>
     )
 }

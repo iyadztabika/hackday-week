@@ -70,27 +70,29 @@ const Post = () => {
 
     return (
         <div className='postPage'>
-            <div className="postPageLeft">
-                <div className="postPageTitle">
-                    {postData.title}
-                </div>
-                <div className="postPageText">
-                    {postData.postText}
-                </div>
-                <div className="postPageFooter">
-                    {postData.username}
+            <div className="leftSide">
+                <div className="post" id='individual'>
+                    <div className="title">
+                        {postData.title}
+                    </div>
+                    <div className="body">
+                        {postData.postText}
+                    </div>
+                    <div className="footer">
+                        {postData.username}
+                    </div>
                 </div>
             </div>
-            <div className="postPageRight">
+            <div className="rightSide">
                 <div className='addCommentContainer'>
                     <input type="text" placeholder='Add Comment' value={newComment} onChange={(e) => setNewComment(e.target.value)} />
                     <button onClick={addComment}>Add Comment</button>
                 </div>
-                <div className='commentsList'>
+                <div className='listOfComments'>
                     {commentData?.map((comment, index) => (
                         <div className='comment' key={index}>
                             {comment.commentBody}
-                            <label className='usernameLabel'>Username: {comment.username}</label>
+                            <label>Username: {comment.username}</label>
                             {authState.username === comment.username && (
                                 <button onClick={() => deleteComment(comment.id)}>x</button>
                             )}
